@@ -78,7 +78,12 @@ exports.changePassword = function(req, res, next) {
     }
   });
 };
-
+exports.studentEmail = function(req, res, next) {
+  //var userId = req.user._id;
+  var studentEmail = String(req.body.studentEmail);
+  console.log(studentEmail);
+  res.send(200);
+};
 /**
  * Get my info
  */
