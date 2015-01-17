@@ -54,6 +54,16 @@ exports.getByTag = function(req, res) {
 exports.create = function(req, res) {
   Task.create(req.body, function(err, task) {
     if(err) { return handleError(res, err); }
+    for (var i = 0; i < task.tags.length; i++) 
+    {
+      Tag.findOneAndUpdate(
+      {name: task.tags[i]},
+      {$push: {tasks: task._id}},
+      {safe: true, upsert: true},
+      function(err, model) {
+          console.log(err);
+      });
+    }
     return res.json(201, task);
   });
 };
