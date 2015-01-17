@@ -14,5 +14,6 @@ router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.put('/:id/studentEmail', auth.isAuthenticated(), controller.studentEmail);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
+router.get('/c/:token', controller.confirm)
 
 module.exports = router;
