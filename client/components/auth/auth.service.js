@@ -82,7 +82,11 @@ angular.module('taskrUApp')
       changePassword: function(oldPassword, newPassword, callback) {
         var cb = callback || angular.noop;
 
-        return User.changePassword({ id: currentUser._id }, {
+        return User.changePassword(
+        //
+        { id: currentUser._id }, 
+        //body of request
+        {
           oldPassword: oldPassword,
           newPassword: newPassword
         }, function(user) {
@@ -90,6 +94,21 @@ angular.module('taskrUApp')
         }, function(err) {
           return cb(err);
         }).$promise;
+      },
+
+      setStudentEmail: function(newStudentEmail, callback) {
+        var cb = callback || angular.noop;
+
+        return User.setStudentEmail(
+            { id: currentUser._id },
+            {
+              studentEmail: newStudentEmail
+            }, function (user) {
+              return cb(user);
+            }, function(err) {
+              return cb(err);
+            }
+          ).$promise;
       },
 
       /**

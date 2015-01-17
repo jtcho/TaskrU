@@ -7,5 +7,6 @@ angular.module('taskrUApp')
         url: '/',
         templateUrl: 'app/main/main.html',
         controller: 'MainCtrl'
-      });
+      })
+      ;
   });
