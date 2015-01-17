@@ -6,6 +6,7 @@ var controller = require('./tag.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/names', controller.listNames);
 router.get('/name/:id', controller.show);
 router.post('/name/', controller.create);
 router.put('/name/:id', controller.update);

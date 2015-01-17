@@ -19,6 +19,18 @@ exports.index = function(req, res) {
     return res.json(200, tags);
   });
 };
+exports.listNames = function(req, res) {
+  Tag.find(function (err, tags) {
+    if(err) { return handleError(res, err); }
+    var names = []
+    for (var i = 0; i < tags.length; i++) 
+    {
+      names.push(tags[i].name)
+      //console.log(tags[i].name);
+    }
+    return res.json(200, names);
+  });
+};
 
 // Get a single tag
 exports.show = function(req, res) {
