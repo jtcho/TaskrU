@@ -103,8 +103,9 @@ h1, h2, h3, h4, h5, h6, li, a, a:hover, a:visited {
 .logo {
 	width: 100px;
 	height: 50px;
-	background-image:url('../../assets/images/logo.svg');
+	background-image:url('../../assets/images/logo.png');
 	background-size:contain;
+	background-repeat:no-repeat;
 	display:block;
 	position: relative;
 	margin: 0 auto 20px auto;
