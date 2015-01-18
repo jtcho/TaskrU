@@ -1,7 +1,11 @@
 'use strict';
 
 angular.module('taskrUApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, $window, $state) {
+    //UI STUFF
+    angular.element('.fadein').hide().fadeIn(1000);
+
+    //EVERYTHING ELSE
     $scope.user = {};
     $scope.errors = {};
 
@@ -15,7 +19,7 @@ angular.module('taskrUApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $location.path('/');
+          $state.go('/');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

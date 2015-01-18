@@ -8,10 +8,81 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
  * App-wide Styles
  */
 
+@font-face {
+    font-family: 'Main';
+    src: url('../../assets/fonts/Jaapokki.otf');
+}
+
+@font-face {
+    font-family: 'Dense';
+    src: url('../../assets/fonts/Dense.otf');
+}
+
+$bodyOuterFontColor: #533555;
+$bodyFontColor: #b4c6d3;
+
 html, body, .screen {
 	width: 100%;
 	height: 100%;
-	background-color: #C1B9C2;
+	background-color: #2d363d;
+}
+
+h1, h2, h3, h4, h5, h6, li, a, a:hover, a:visited {
+	color: $bodyFontColor;
+  	font-family:'Dense'; 
+}
+
+.screen-box {
+	h1, h2, h3, h4, h5, h6 {
+		color: $bodyFontColor;
+		font-family: 'Dense', sans-serif;
+	}
+
+	h1 {
+		font-size: 8em;
+	}
+
+	background-color: #636F79;
+
+	padding: 50px;
+	// border-radius: 10px;
+}
+
+.facebook-icon {
+	cursor: pointer;
+	opacity: 0.5;
+
+	transition: opacity 1s;
+	-webkit-transition: opacity 1s;
+	-moz-transition: opacity 1s;
+	-o-transition: opacity 1s;
+}
+
+.facebook-icon:hover {
+	opacity: 1.0;
+}
+
+.facebook-icon-img {
+	background-image:url('../../assets/images/fb.svg');
+	background-size:contain;
+	background-position:center;
+	display:inline-block;
+	width:60px;
+	height:60px;
+	margin: 20px auto 0 auto;
+	vertical-align:bottom;
+
+	color: $bodyFontColor;
+
+	text-decoration: none;
+}
+
+.facebook-icon-text {
+	display:inline-block; 
+  	font-size:2em; 
+  	margin-left: 5px;
+  	color: $bodyFontColor;
+  	font-family:'Dense'; 
 }
 
 .container {
@@ -20,12 +91,24 @@ html, body, .screen {
 
 .sidebar {
 	width:0;
-  	background-color:#7F6881;
+  	background-color:#1A252E;
   	height:100%;
   	display:inline-block;
   	position:relative;
   	left: 0;
   	animation: expandWidth 0.5s forwards ease-out;
+  	padding-top: 225px;
+}
+
+.logo {
+	width: 100px;
+	height: 50px;
+	background-image:url('../../assets/images/logo.svg');
+	background-size:contain;
+	display:block;
+	position: relative;
+	margin: 0 auto 20px auto;
+	right: 15px;
 }
 
 @-webkit-keyframes expandWidth {

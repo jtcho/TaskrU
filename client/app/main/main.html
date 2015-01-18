@@ -1,6 +1,15 @@
-<!-- <div class="sidebar">
-</div> -->
+<div class="animate-screen" style="width: 100%; height: 100%;">
+<div class="sidebar text-center">
+	<div class="logo" ng-mouseenter="animateLogo()" />
+	<ul>
+		<li ng-repeat="item in sidebarItems">
+			<a style="cursor:pointer;" ng-click="onSidebarItemClick(item)">
+			{{item.title}}
+			</a>
+		</li>
+	</ul>
+</div>
 
-<div>
+<div ui-view="" />
 
 </div>
