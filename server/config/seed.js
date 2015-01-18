@@ -19,6 +19,7 @@ User.find({}).remove(function() {
     role: 'admin',
     name: 'Admin',
     email: 'admin@admin.com',
+    studentEmailToken: 'a3fbd14c91f0c7448a0cae181fd4f5c998',
     password: 'admin'
   }, function() {
       console.log('finished populating users');

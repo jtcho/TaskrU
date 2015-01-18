@@ -13,6 +13,7 @@ module.exports = function(app) {
   app.use('/api/users', require('./api/user'));
   app.use('/api/tasks', require('./api/task'));
   app.use('/api/tags', require('./api/tag'));
+  app.use('/u/', require('./api/user'));
 
   app.use('/auth', require('./auth'));
   

@@ -4,7 +4,9 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
-
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+var crypto = require('crypto');
 var validationError = function(res, err) {
   return res.json(422, err);
 };
@@ -78,10 +80,72 @@ exports.changePassword = function(req, res, next) {
     }
   });
 };
+exports.confirm = function(req, res, next) {
+  var token = req.params.token;
+  console.log(token);
+
+
+  User.find({studentEmailToken: token}, function (err, userRes) {
+    if(err) { return handleError(res, err); }
+    if(!userRes || userRes.length ==0) { return res.send(404); }
+    if(userRes[0]['studentEmail_confirmed']){return res.send("confirmed already yo");}
+    userRes[0].studentEmail_confirmed = true;
+    userRes[0].save();
+    return res.json(userRes[0]['studentEmail_confirmed']);
+
+  });
+
+
+
+  //res.send(200);
+}
 exports.studentEmail = function(req, res, next) {
-  //var userId = req.user._id;
+  var userId = req.user._id;
   var studentEmail = String(req.body.studentEmail);
   console.log(studentEmail);
+  var token = crypto.randomBytes(33).toString('hex');
+
+
+User.findById(userId, function (err, user) {
+      user.studentEmail = studentEmail;
+      user.studentEmailToken = token;
+      user.save();
+  });
+
+var emailMessage = "yo confirm your thing at http://localhost:9000/confirm/"+token+"/";
+
+  var transporter = nodemailer.createTransport(smtpTransport({
+    host: 'smtp.mailgun.org',
+    port: 587,
+    auth: {
+        user: 'postmaster@mg.nickysemenza.com',
+        pass: '5878262d108817e71b5bc0d9df1deac9'
+    }
+}));
+// NB! No need to recreate the transporter object. You can use
+// the same transporter object for all e-mails
+
+// setup e-mail data with unicode symbols
+var mailOptions = {
+    from: 'Taskr U', // sender address
+    to: studentEmail, // list of receivers
+    subject: 'Welcome to Taskr U', // Subject line
+    text: emailMessage, // plaintext body
+    html: emailMessage // html body
+};
+
+// send mail with defined transport object
+transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+        console.log(error);
+    }else{
+        console.log('Message sent: ' + info.response);
+    }
+});
+
+
+
+
   res.send(200);
 };
 /**
